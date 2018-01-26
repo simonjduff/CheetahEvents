@@ -33,11 +33,12 @@ namespace CheetahEvents.Tests.Steps
             Assert.True(then.Context.Entity.Id != Guid.Empty);
         }
 
-        public static void EventIsRaised<T>(this IThen<EntityContext<T>> then)
+        public static void EventIsRaised<T>(this IThen<EntityContext<T>> then, string eventType)
             where T : EntityBase
         {
             var e = then.Context.Events.Single();
             Assert.NotNull(e);
+            Assert.Equal(eventType, e.MessageType);
         }
     }
 }

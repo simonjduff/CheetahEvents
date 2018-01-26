@@ -19,9 +19,9 @@ namespace CheetahEvents.Tests.Contexts
             {
                 _action = action;
             }
-            public Task RaiseEvent()
+            public Task RaiseEvent(string eventName)
             {
-                _action(new Event());
+                _action(new Event(eventName));
                 return Task.CompletedTask;
             }
         }

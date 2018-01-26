@@ -16,7 +16,7 @@ namespace CheetahEvents.Core
             {
                 return;
             }
-            await Subscriber.RaiseEvent();
+            await Subscriber.RaiseEvent(eventName);
         }
     }
 }

@@ -4,6 +4,6 @@ namespace CheetahEvents.Core
 {
     public interface ISubscriber
     {
-        Task RaiseEvent();
+        Task RaiseEvent(string eventName);
     }
 }

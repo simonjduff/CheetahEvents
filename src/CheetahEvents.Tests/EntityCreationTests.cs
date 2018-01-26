@@ -17,7 +17,7 @@ namespace CheetahEvents.Tests
                 .When(i => i.CreateTheEntity())
                 .Then(t => t.VersionIs(1))
                 .And(t => t.IdIsGenerated())
-                .And(t => t.EventIsRaised())
+                .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))
                 .ExecuteAsync();
         }
 
