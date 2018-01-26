@@ -3,11 +3,11 @@ using CheetahEvents.Tests.Steps;
 using Xunit;
 using CheetahEvents.Tests.Contexts;
 using System.Threading.Tasks;
-using CheetahEvents.Core;
+using static CheetahEvents.Tests.Entities.EntityCreationTests;
 
 namespace CheetahEvents.Tests
 {
-    public class EntityCreationTests
+    public partial class EntityCreationTests
     {
         [Fact]
         public async Task EntityCreatesWithIdAndVersion()
@@ -19,14 +19,6 @@ namespace CheetahEvents.Tests
                 .And(t => t.IdIsGenerated())
                 .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))
                 .ExecuteAsync();
-        }
-
-        public class EntityClass : EntityBase
-        {
-            public EntityClass()
-            {
-                RaiseEvent("EntityClassCreated").Wait();
-            }
         }
     }
 }

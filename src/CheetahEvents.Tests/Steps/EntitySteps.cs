@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using CheetahEvents.Core;
 using CheetahEvents.Tests.Contexts;
 using CheetahTesting;
@@ -36,9 +37,18 @@ namespace CheetahEvents.Tests.Steps
         public static void EventIsRaised<T>(this IThen<EntityContext<T>> then, string eventType)
             where T : EntityBase
         {
-            var e = then.Context.Events.Single();
+            Assert.NotEmpty(then.Context.Events);
+            Assert.True(then.Context.Events.Count() > then.Context.EventsChecked);
+            var e = then.Context.Events.Skip(then.Context.EventsChecked).First();
             Assert.NotNull(e);
             Assert.Equal(eventType, e.MessageType);
+            then.Context.EventsChecked++;
+        }
+
+        public static async Task MethodIsCalledAsync<T>(this IWhen<EntityContext<T>> when, Func<T, Task> action)
+        where T : EntityBase
+        {
+            await action(when.Context.Entity);
         }
     }
 }

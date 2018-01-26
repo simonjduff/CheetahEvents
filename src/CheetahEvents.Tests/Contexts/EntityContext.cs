@@ -7,6 +7,8 @@ namespace CheetahEvents.Tests.Contexts
 {
     public class EntityContext<TEntity> where TEntity : EntityBase
     {
+        public int EventsChecked{get;set;} = 0;
+
         public IEntityService<TEntity> EntityService{get;set;}
         public TEntity Entity{get;set;}
         public IList<Event> Events { get; } = new List<Event>();
