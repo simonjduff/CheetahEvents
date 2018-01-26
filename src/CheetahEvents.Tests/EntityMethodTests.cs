@@ -18,6 +18,7 @@ namespace CheetahEvents.Tests
                 .AndAsync(async i => await i.MethodIsCalledAsync(async e => await e.ArbitraryMethod()))
                 .Then(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))
                 .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_ArbitraryMethod"))
+                .And(t => t.VersionIs(2))
                 .ExecuteAsync();
         }
     }
