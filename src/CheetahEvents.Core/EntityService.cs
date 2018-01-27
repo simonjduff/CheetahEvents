@@ -21,7 +21,9 @@ namespace CheetahEvents.Core
                 Subscriber = _subscriber
             };
 
-            _subscriber.RaiseEvent(new Event($"{typeof(T).Name}_Created", entity.Version));
+            _subscriber.RaiseEvent(new Event(
+                $"{typeof(T).Name}_Created", 
+                entity));
 
             return entity;
         }

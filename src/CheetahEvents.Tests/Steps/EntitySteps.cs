@@ -51,5 +51,13 @@ namespace CheetahEvents.Tests.Steps
         {
             await action(when.Context.Entity);
         }
+
+        public static void EventIdsMatch<T>(this IThen<EntityContext<T>> then)
+        where T : EntityBase
+        {
+            var eventIds = then.Context.Events.GroupBy(e => e.Id);
+            Assert.True(eventIds.Count() == 1);
+            Assert.True(eventIds.Single().Key != Guid.Empty);
+        }
     }
 }

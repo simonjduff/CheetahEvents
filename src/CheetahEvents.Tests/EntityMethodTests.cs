@@ -19,6 +19,7 @@ namespace CheetahEvents.Tests
                 .Then(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))
                 .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_ArbitraryMethod"))
                 .And(t => t.VersionIs(2))
+                .And(t => t.EventIdsMatch())
                 .ExecuteAsync();
         }
     }

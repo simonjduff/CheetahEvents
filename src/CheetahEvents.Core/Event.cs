@@ -6,12 +6,15 @@ namespace CheetahEvents.Core
     public class Event
     {
         public Event(string messageType,
-            int version)
+            EntityBase entity)
         {
             MessageType = messageType;
-            Version = version;
+            Version = entity.Version;
+            Id = entity.Id;
         }
+
         public string MessageType { get; }
-        public int Version { get; }
+        public int Version {get;}
+        public Guid Id {get;}
     }
 }
