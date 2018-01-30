@@ -1,0 +1,20 @@
+version: '1.0.{build}'
+image: Visual Studio 2017
+configuration:
+- Debug
+- Release
+platform: Any CPU
+init:
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+before_build:
+- appveyor-retry dotnet restore -v Minimal
+build_script:
+- dotnet build "src\CheetahEvents.Core" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+- dotnet build "src\CheetahEvents.Tests" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+after_build:
+- dotnet pack "src\CheetahEvents.Core" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+test_script:
+- dotnet test "src/CheetahEvents.Tests" -c %CONFIGURATION%
+artifacts:
+  - path: '**\*.nupkg'
+    name: Nuget packages
