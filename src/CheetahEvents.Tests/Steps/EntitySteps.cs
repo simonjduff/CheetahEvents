@@ -41,7 +41,7 @@ namespace CheetahEvents.Tests.Steps
             Assert.True(then.Context.Events.Count() > then.Context.EventsChecked);
             var e = then.Context.Events.Skip(then.Context.EventsChecked).First();
             Assert.NotNull(e);
-            Assert.Equal(eventType, e.MessageType);
+            Assert.Equal(eventType, e.EventType);
             Assert.Equal(then.Context.EventsChecked + 1, e.Version);
             then.Context.EventsChecked++;
         }
