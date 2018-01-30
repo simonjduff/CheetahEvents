@@ -14,7 +14,7 @@ namespace CheetahEvents.Tests
         {
             await CTest<EntityContext<EntityClass>>
                 .Given(a => a.EntityService())
-                .When(i => i.CreateTheEntity())
+                .WhenAsync(i => i.CreateTheEntity())
                 .Then(t => t.VersionIs(1))
                 .And(t => t.IdIsGenerated())
                 .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))

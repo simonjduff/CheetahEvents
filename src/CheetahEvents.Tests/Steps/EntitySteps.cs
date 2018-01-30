@@ -16,10 +16,10 @@ namespace CheetahEvents.Tests.Steps
             var subscriber = new EntityContext<T>.Subscriber(e => given.Context.Events.Add(e));
             given.Context.EntityService = new EntityService<T>(subscriber);
         }
-        public static void CreateTheEntity<T>(this IWhen<EntityContext<T>> when)
+        public static async Task CreateTheEntity<T>(this IWhen<EntityContext<T>> when)
         where T : EntityBase
         {
-            when.Context.Entity = when.Context.EntityService.NewEntity();
+            when.Context.Entity = await when.Context.EntityService.NewEntity();
         }
 
         public static void VersionIs<T>(this IThen<EntityContext<T>> then, int version)

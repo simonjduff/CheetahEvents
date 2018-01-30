@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CheetahEvents.Core
 {
@@ -13,7 +14,7 @@ namespace CheetahEvents.Core
             _subscriber = subscriber;
         }
 
-        public T NewEntity()
+        public async Task<T> NewEntity()
         {
             var entity = new T{
                 Version = 1,
@@ -21,7 +22,7 @@ namespace CheetahEvents.Core
                 Subscriber = _subscriber
             };
 
-            _subscriber.RaiseEvent(new Event(
+            await _subscriber.RaiseEvent(new Event(
                 $"{typeof(T).Name}_Created", 
                 entity));
 

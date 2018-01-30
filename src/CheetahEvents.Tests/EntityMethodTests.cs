@@ -14,7 +14,7 @@ namespace CheetahEvents.Tests
         {
             await CTest<EntityContext<EntityClass>>
                 .Given(a => a.EntityService())
-                .When(i => i.CreateTheEntity())
+                .WhenAsync(i => i.CreateTheEntity())
                 .AndAsync(async i => await i.MethodIsCalledAsync(async e => await e.ArbitraryMethod()))
                 .Then(t => t.EventIsRaised($"{typeof(EntityClass).Name}_Created"))
                 .And(t => t.EventIsRaised($"{typeof(EntityClass).Name}_ArbitraryMethod"))
