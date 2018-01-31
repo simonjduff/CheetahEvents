@@ -12,6 +12,15 @@ namespace CheetahEvents.Tests.Entities
             {
                 await RaiseEvent("ArbitraryMethod");
             }
+
+            public async Task AnonymousMethod()
+            {
+                await RaiseEvent("AnonymousMethod",
+                    new {
+                        Data1 = "This is my data",
+                        Data2 = 6
+                    });
+            }
         }
     }
 }

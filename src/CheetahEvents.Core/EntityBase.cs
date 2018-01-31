@@ -9,7 +9,7 @@ namespace CheetahEvents.Core
         public Guid Id { get; set; }
         public int Version { get; set; }
 
-        protected async Task RaiseEvent(string eventName)
+        protected async Task RaiseEvent(string eventName, object data = null)
         {
             if (Subscriber == null)
             {
@@ -20,7 +20,7 @@ namespace CheetahEvents.Core
 
             await Subscriber.RaiseEvent(new Event(
                 $"{GetType().Name}_{eventName}", 
-                this));
+                this, data));
         }
     }
 }

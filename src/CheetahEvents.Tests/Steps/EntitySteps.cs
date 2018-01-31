@@ -34,7 +34,9 @@ namespace CheetahEvents.Tests.Steps
             Assert.True(then.Context.Entity.Id != Guid.Empty);
         }
 
-        public static void EventIsRaised<T>(this IThen<EntityContext<T>> then, string eventType)
+        public static void EventIsRaised<T>(this IThen<EntityContext<T>> then, 
+            string eventType,
+            Action<object> validationFunc = null)
             where T : EntityBase
         {
             Assert.NotEmpty(then.Context.Events);
@@ -44,6 +46,10 @@ namespace CheetahEvents.Tests.Steps
             Assert.Equal(eventType, e.EventType);
             Assert.Equal(then.Context.EventsChecked + 1, e.Version);
             then.Context.EventsChecked++;
+
+            if (validationFunc == null) {return;}
+
+            validationFunc(e.Body);
         }
 
         public static async Task MethodIsCalledAsync<T>(this IWhen<EntityContext<T>> when, Func<T, Task> action)
