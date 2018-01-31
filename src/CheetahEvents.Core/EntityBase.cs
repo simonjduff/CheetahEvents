@@ -19,7 +19,7 @@ namespace CheetahEvents.Core
             Version++;
 
             await Subscriber.RaiseEvent(new Event(
-                eventName, 
+                $"{GetType().Name}_{eventName}", 
                 this));
         }
     }

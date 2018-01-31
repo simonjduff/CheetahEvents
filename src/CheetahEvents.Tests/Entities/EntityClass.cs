@@ -10,7 +10,7 @@ namespace CheetahEvents.Tests.Entities
         {
             public async Task ArbitraryMethod()
             {
-                await RaiseEvent("EntityClass_ArbitraryMethod");
+                await RaiseEvent("ArbitraryMethod");
             }
         }
     }
